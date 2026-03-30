@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>翔择创丽 · 数智化协同及AI应用考评报告 · 2025年2月</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{--pri:#1a7cfa;--bg:#f0f4ff;--card:#fff;--text:#1a2a4a;--sub:#6b7a99;--rad:14px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+header{background:linear-gradient(135deg,#1a7cfa 0%,#6c63ff 60%,#00c4b4 100%);color:#fff;padding:28px 32px 22px;box-shadow:0 4px 24px #1a7cfa33;}
+header h1{font-size:22px;font-weight:700;letter-spacing:.5px;}
+header p{font-size:13px;opacity:.85;margin-top:6px;}
+.badge{display:inline-block;background:rgba(255,255,255,.18);border-radius:20px;padding:3px 12px;font-size:11.5px;margin-top:8px;}
+nav{display:flex;gap:6px;padding:16px 24px;background:#fff;box-shadow:0 2px 12px #1a7cfa12;flex-wrap:wrap;position:sticky;top:0;z-index:100;}
+.ntab{padding:8px 18px;border-radius:22px;border:none;cursor:pointer;font-size:13px;font-weight:600;background:#f0f4ff;color:#6b7a99;transition:.2s;}
+.ntab:hover{background:#e0eaff;color:#1a7cfa;}
+.ntab.on{background:var(--pri);color:#fff;box-shadow:0 4px 12px #1a7cfa44;}
+.page{display:none;padding:24px;max-width:1200px;margin:0 auto;}
+.page.on{display:block;}
+.ptitle{font-size:20px;font-weight:700;color:#1a2a4a;margin-bottom:6px;}
+.psub{font-size:13px;color:#6b7a99;margin-bottom:20px;}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;margin-bottom:24px;}
+.kcard{background:#fff;border-radius:var(--rad);padding:18px 16px;box-shadow:0 2px 12px #1a7cfa0d;border-top:3px solid var(--kc,#1a7cfa);position:relative;overflow:hidden;}
+.kcard::after{content:attr(data-icon);position:absolute;right:12px;bottom:6px;font-size:28px;opacity:.15;}
+.klb{font-size:11.5px;color:#6b7a99;margin-bottom:6px;}
+.kv{font-size:26px;font-weight:700;color:var(--kc,#1a7cfa);}
+.ks{font-size:11px;color:#9aaac8;margin-top:3px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:700px){.grid2{grid-template-columns:1fr;}}
+.card{background:#fff;border-radius:var(--rad);padding:20px;box-shadow:0 2px 16px #1a7cfa0d;margin-bottom:16px;}
+.ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.ct{font-size:14px;font-weight:700;color:#1a2a4a;}
+.cb2{font-size:11px;color:#9aaac8;}
+.cw{position:relative;height:260px;}
+.cw.tall{height:340px;}
+.cw.sm{height:200px;}
+table{width:100%;border-collapse:collapse;font-size:12.5px;}
+th{background:#f5f8ff;color:#4a6fa5;padding:9px 10px;text-align:left;font-weight:600;border-bottom:2px solid #e8eef8;}
+td{padding:8px 10px;border-bottom:1px solid #f0f4ff;color:#2a3a5a;}
+tr:hover td{background:#f8faff;}
+.tag{display:inline-block;border-radius:10px;padding:1px 8px;font-size:11px;font-weight:600;}
+.tg{background:#e8f8f0;color:#0a8a4a;border:1px solid #b2e8cc;}
+.ty{background:#fff8e6;color:#b86a00;border:1px solid #ffd97a;}
+.tr{background:#fff0f0;color:#c0392b;border:1px solid #f5b8b8;}
+.tb{background:#e8f0ff;color:#1a5fcc;border:1px solid #b8d0ff;}
+.panel{border:1px solid #e8eef8;border-radius:10px;margin-bottom:10px;overflow:hidden;}
+.panel-h{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;background:#f8faff;user-select:none;}
+.panel-h:hover{background:#f0f4ff;}
+.ph-title{font-weight:600;font-size:13px;color:#1a2a4a;}
+.ph-meta{display:flex;gap:10px;align-items:center;font-size:12px;color:#6b7a99;}
+.ph-arr{font-size:16px;color:#9aaac8;transition:.2s;}
+.panel-b{display:none;padding:14px 16px;overflow-x:auto;}
+.panel.open .panel-b{display:block;}
+.panel.open .ph-arr{transform:rotate(180deg);}
+.hm-wrap{overflow-x:auto;}
+.hm-table{border-collapse:collapse;font-size:12px;min-width:600px;}
+.hm-table th{background:#f5f8ff;padding:8px 12px;text-align:center;color:#4a6fa5;font-weight:600;white-space:nowrap;border:1px solid #e8eef8;}
+.hm-table td{padding:9px 14px;text-align:center;font-weight:600;border:1px solid #e8eef8;white-space:nowrap;}
+.hm-table .dept-cell{text-align:left;font-weight:600;background:#f8faff;color:#2a3a5a;}
+.ic{border-left:4px solid #1a7cfa;padding:12px 16px;background:#f8faff;border-radius:0 8px 8px 0;margin-bottom:12px;}
+.it{font-weight:700;font-size:13px;margin-bottom:6px;color:#1a2a4a;}
+.ib{font-size:12.5px;color:#4a5a7a;line-height:1.7;}
+.rank-badge{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-size:11px;font-weight:700;}
+.r1{background:#ffd700;color:#7a5a00;}
+.r2{background:#c0c8d8;color:#3a4a5a;}
+.r3{background:#d4956a;color:#fff;}
+.rn{background:#f0f4ff;color:#6b7a99;}
+.prog-bar{height:8px;border-radius:4px;background:#e8eef8;overflow:hidden;margin-top:4px;}
+.prog-fill{height:100%;border-radius:4px;}
+</style>
+</head>
+<body>
+<header>
+  <h1>🏢 翔择创丽 · 数智化协同及AI应用考评报告</h1>
+  <p>考核周期：2025年2月 &nbsp;|&nbsp; 全员双项考核分析</p>
+  <span class="badge">📊 AI工具考评 + 🤝 协同工具考评</span>
+</header>
+<nav>
+  <button class="ntab on" onclick="sw('ov',this)">📋 总览</button>
+  <button class="ntab" onclick="sw('ai',this)">🤖 AI工具考评</button>
+  <button class="ntab" onclick="sw('co',this)">🤝 协同工具考评</button>
+  <button class="ntab" onclick="sw('rk',this)">🏆 部门排名</button>
+  <button class="ntab" onclick="sw('ins',this)">💡 核心洞察</button>
+</nav>
+<div id="p-ov" class="page on">
+  <div class="ptitle">📋 总览概况</div>
+  <div class="psub">翔择创丽总部 · 2025年2月 全员数智化工具应用考核综合分析</div>
+  <div class="kgrid" id="ov-kpi"></div>
+  <div class="grid2">
+    <div class="card"><div class="ch"><div class="ct">🤖 AI绩效 · 部门对比</div></div><div class="cw"><canvas id="ov-ai"></canvas></div></div>
+    <div class="card"><div class="ch"><div class="ct">🤝 协同绩效 · 部门对比</div></div><div class="cw"><canvas id="ov-co"></canvas></div></div>
+  </div>
+  <div class="card"><div class="ch"><div class="ct">📊 双维综合对比（AI绩效 vs 协同绩效）</div><div class="cb2">气泡大小=人数</div></div><div class="cw tall"><canvas id="ov-scatter"></canvas></div></div>
+</div>
+<div id="p-ai" class="page">
+  <div class="ptitle">🤖 AI工具使用考评分析</div>
+  <div class="psub">考核维度：AI对话数量得分（2分）+ 工具岗位匹配性（5分）= AI月度绩效考核评分（满分7分）</div>
+  <div id="ai-kpi" class="kgrid"></div>
+  <div class="grid2">
+    <div class="card"><div class="ch"><div class="ct">📈 各部门 AI绩效均值</div></div><div class="cw"><canvas id="ai-perf"></canvas></div></div>
+    <div class="card"><div class="ch"><div class="ct">💬 各部门 AI月均对话数</div></div><div class="cw"><canvas id="ai-talks"></canvas></div></div>
+  </div>
+  <div class="card"><div class="ch"><div class="ct">🔍 各部门 AI匹配性得分（横向）</div></div><div class="cw sm"><canvas id="ai-match"></canvas></div></div>
+  <div class="card"><div class="ch"><div class="ct">👥 人员明细</div><div class="cb2">共30人</div></div>
+    <div id="ai-panels"></div>
+  </div>
+</div>
+<div id="p-co" class="page">
+  <div class="ptitle">🤝 协同工具使用考评分析</div>
+  <div class="psub">考核维度：在线文档创建≥3个（3分）+ 相关文档≥5个（5分）+ 文档岗位匹配性（5分）= 月度绩效考核评分（满分13分）</div>
+  <div id="co-kpi" class="kgrid"></div>
+  <div class="grid2">
+    <div class="card"><div class="ch"><div class="ct">📈 各部门 协同绩效均值</div></div><div class="cw"><canvas id="co-perf"></canvas></div></div>
+    <div class="card"><div class="ch"><div class="ct">📄 各部门 文档使用量对比</div></div><div class="cw"><canvas id="co-docs"></canvas></div></div>
+  </div>
+  <div class="card"><div class="ch"><div class="ct">🔍 各部门 文档匹配性得分（横向）</div></div><div class="cw sm"><canvas id="co-match"></canvas></div></div>
+  <div class="card"><div class="ch"><div class="ct">👥 人员明细</div><div class="cb2">共30人</div></div>
+    <div id="co-panels"></div>
+  </div>
+</div>
+<div id="p-rk" class="page">
+  <div class="ptitle">🏆 部门排名汇总</div>
+  <div class="psub">各五级部门综合 AI 与协同双维排名对比</div>
+  <div id="rk-content"></div>
+</div>
+<div id="p-ins" class="page">
+  <div class="ptitle">💡 核心洞察</div>
+  <div class="psub">多维度数据深度分析与改善建议</div>
+  <div id="ins-content"></div>
+</div>
+<script>
+const D={"total":30,"aiAvg":6.3,"coAvg":11.94,"aiTalkAvg":8.87,"aiMatchAvg":4.36,"aiFull":27,"coHigh":22,"aiLow":3,"coLow3":1,"ai_l5":[{"dept":"便利建设部","n":7,"talks":7.0,"match":4.64,"perf":7.0},{"dept":"场景体验设计部","n":5,"talks":7.6,"match":2.76,"perf":2.8},{"dept":"总经办","n":2,"talks":7.5,"match":4.75,"perf":7.0},{"dept":"数智科技部","n":2,"talks":9.0,"match":4.85,"perf":7.0},{"dept":"餐饮工程部","n":7,"talks":9.43,"match":4.61,"perf":7.0},{"dept":"餐饮设备部","n":7,"talks":11.43,"match":4.73,"perf":7.0}],"co_l5":[{"dept":"便利建设部","n":7,"myDoc":8.43,"relDoc":29.14,"docMatch":4.0,"perf":12.0},{"dept":"场景体验设计部","n":5,"myDoc":8.0,"relDoc":11.6,"docMatch":3.72,"perf":11.72},{"dept":"总经办","n":2,"myDoc":5.0,"relDoc":6.0,"docMatch":4.65,"perf":12.65},{"dept":"数智科技部","n":2,"myDoc":5.5,"relDoc":12.0,"docMatch":4.5,"perf":12.5},{"dept":"餐饮工程部","n":7,"myDoc":6.43,"relDoc":7.57,"docMatch":3.69,"perf":11.69},{"dept":"餐饮设备部","n":7,"myDoc":6.14,"relDoc":10.0,"docMatch":4.37,"perf":11.94}],"ai_detail":[{"姓名":"李平","部门":"便利建设部","talks":7.0,"match":4.8,"perf":7.0},{"姓名":"康顿","部门":"便利建设部","talks":6.0,"match":4.7,"perf":7.0},{"姓名":"朱诗嘉","部门":"便利建设部","talks":6.0,"match":4.0,"perf":7.0},{"姓名":"黄正中","部门":"便利建设部","talks":12.0,"match":4.8,"perf":7.0},{"姓名":"沈超","部门":"便利建设部","talks":6.0,"match":4.8,"perf":7.0},{"姓名":"秦丽华","部门":"便利建设部","talks":6.0,"match":4.7,"perf":7.0},{"姓名":"王泉","部门":"便利建设部","talks":6.0,"match":4.7,"perf":7.0},{"姓名":"陈惠","部门":"场景体验设计部","talks":4.0,"match":1.5,"perf":0.0},{"姓名":"邹贵旺","部门":"场景体验设计部","talks":4.0,"match":1.5,"perf":0.0},{"姓名":"梁婧","部门":"场景体验设计部","talks":13.0,"match":4.5,"perf":7.0},{"姓名":"蒋鲁嘉","部门":"场景体验设计部","talks":4.0,"match":1.5,"perf":0.0},{"姓名":"任颂华","部门":"场景体验设计部","talks":13.0,"match":4.8,"perf":7.0},{"姓名":"张浩东","部门":"总经办","talks":9.0,"match":4.7,"perf":7.0},{"姓名":"陈伸田","部门":"总经办","talks":6.0,"match":4.8,"perf":7.0},{"姓名":"吴育辉","部门":"数智科技部","talks":10.0,"match":4.8,"perf":7.0},{"姓名":"徐广成","部门":"数智科技部","talks":8.0,"match":4.9,"perf":7.0},{"姓名":"常莹","部门":"餐饮工程部","talks":6.0,"match":4.7,"perf":7.0},{"姓名":"杨建雄","部门":"餐饮工程部","talks":10.0,"match":4.5,"perf":7.0},{"姓名":"陆迪烨","部门":"餐饮工程部","talks":6.0,"match":4.8,"perf":7.0},{"姓名":"陆晓锋","部门":"餐饮工程部","talks":12.0,"match":4.5,"perf":7.0},{"姓名":"胡雨清","部门":"餐饮工程部","talks":11.0,"match":4.8,"perf":7.0},{"姓名":"周钦巍","部门":"餐饮工程部","talks":10.0,"match":4.5,"perf":7.0},{"姓名":"金树锋","部门":"餐饮工程部","talks":11.0,"match":4.5,"perf":7.0},{"姓名":"牛玉杰","部门":"餐饮设备部","talks":12.0,"match":4.8,"perf":7.0},{"姓名":"李孝磊","部门":"餐饮设备部","talks":15.0,"match":4.5,"perf":7.0},{"姓名":"陈翰阳","部门":"餐饮设备部","talks":18.0,"match":4.7,"perf":7.0},{"姓名":"池海滨","部门":"餐饮设备部","talks":12.0,"match":4.7,"perf":7.0},{"姓名":"徐燕怡","部门":"餐饮设备部","talks":11.0,"match":4.8,"perf":7.0},{"姓名":"宋本召","部门":"餐饮设备部","talks":6.0,"match":4.8,"perf":7.0},{"姓名":"方建刚","部门":"餐饮设备部","talks":6.0,"match":4.8,"perf":7.0}],"co_detail":[{"姓名":"李平","部门":"便利建设部","myDoc":15.0,"relDoc":30.0,"docMatch":4.0,"perf":12.0},{"姓名":"康顿","部门":"便利建设部","myDoc":12.0,"relDoc":26.0,"docMatch":4.5,"perf":12.5},{"姓名":"朱诗嘉","部门":"便利建设部","myDoc":4.0,"relDoc":31.0,"docMatch":2.5,"perf":10.5},{"姓名":"黄正中","部门":"便利建设部","myDoc":7.0,"relDoc":28.0,"docMatch":3.5,"perf":11.5},{"姓名":"沈超","部门":"便利建设部","myDoc":11.0,"relDoc":30.0,"docMatch":4.5,"perf":12.5},{"姓名":"秦丽华","部门":"便利建设部","myDoc":4.0,"relDoc":30.0,"docMatch":4.5,"perf":12.5},{"姓名":"王泉","部门":"便利建设部","myDoc":6.0,"relDoc":29.0,"docMatch":4.5,"perf":12.5},{"姓名":"陈惠","部门":"场景体验设计部","myDoc":4.0,"relDoc":6.0,"docMatch":4.8,"perf":12.8},{"姓名":"邹贵旺","部门":"场景体验设计部","myDoc":14.0,"relDoc":12.0,"docMatch":4.8,"perf":12.8},{"姓名":"梁婧","部门":"场景体验设计部","myDoc":12.0,"relDoc":14.0,"docMatch":2.5,"perf":10.5},{"姓名":"蒋鲁嘉","部门":"场景体验设计部","myDoc":7.0,"relDoc":13.0,"docMatch":4.5,"perf":12.5},{"姓名":"任颂华","部门":"场景体验设计部","myDoc":3.0,"relDoc":13.0,"docMatch":2.0,"perf":10.0},{"姓名":"张浩东","部门":"总经办","myDoc":6.0,"relDoc":7.0,"docMatch":4.5,"perf":12.5},{"姓名":"陈伸田","部门":"总经办","myDoc":4.0,"relDoc":5.0,"docMatch":4.8,"perf":12.8},{"姓名":"吴育辉","部门":"数智科技部","myDoc":5.0,"relDoc":9.0,"docMatch":4.5,"perf":12.5},{"姓名":"徐广成","部门":"数智科技部","myDoc":6.0,"relDoc":15.0,"docMatch":4.5,"perf":12.5},{"姓名":"常莹","部门":"餐饮工程部","myDoc":3.0,"relDoc":8.0,"docMatch":4.5,"perf":12.5},{"姓名":"杨建雄","部门":"餐饮工程部","myDoc":8.0,"relDoc":11.0,"docMatch":4.5,"perf":12.5},{"姓名":"陆迪烨","部门":"餐饮工程部","myDoc":7.0,"relDoc":6.0,"docMatch":2.5,"perf":10.5},{"姓名":"陆晓锋","部门":"餐饮工程部","myDoc":6.0,"relDoc":7.0,"docMatch":2.8,"perf":10.8},{"姓名":"胡雨清","部门":"餐饮工程部","myDoc":10.0,"relDoc":6.0,"docMatch":4.5,"perf":12.5},{"姓名":"周钦巍","部门":"餐饮工程部","myDoc":5.0,"relDoc":6.0,"docMatch":2.5,"perf":10.5},{"姓名":"金树锋","部门":"餐饮工程部","myDoc":6.0,"relDoc":9.0,"docMatch":4.5,"perf":12.5},{"姓名":"徐燕怡","部门":"餐饮设备部","myDoc":6.0,"relDoc":7.0,"docMatch":4.8,"perf":12.8},{"姓名":"陈翰阳","部门":"餐饮设备部","myDoc":5.0,"relDoc":9.0,"docMatch":4.5,"perf":12.5},{"姓名":"牛玉杰","部门":"餐饮设备部","myDoc":4.0,"relDoc":11.0,"docMatch":4.8,"perf":12.8},{"姓名":"李孝磊","部门":"餐饮设备部","myDoc":7.0,"relDoc":12.0,"docMatch":4.0,"perf":12.0},{"姓名":"池海滨","部门":"餐饮设备部","myDoc":14.0,"relDoc":15.0,"docMatch":4.5,"perf":12.5},{"姓名":"宋本召","部门":"餐饮设备部","myDoc":5.0,"relDoc":9.0,"docMatch":4.5,"perf":12.5},{"姓名":"方建刚","部门":"餐饮设备部","myDoc":2.0,"relDoc":7.0,"docMatch":3.5,"perf":8.5}]};
+const COLORS=['#1a7cfa','#6c63ff','#00c4b4','#f5a623','#ff5f6d','#43c6ac','#f093fb','#4facfe'];
+const DC={'便利建设部':'#1a7cfa','场景体验设计部':'#6c63ff','总经办':'#00c4b4','数智科技部':'#f5a623','餐饮工程部':'#ff5f6d','餐饮设备部':'#43c6ac'};
+const DS={'便利建设部':'便利建设','场景体验设计部':'场景设计','总经办':'总经办','数智科技部':'数智科技','餐饮工程部':'餐饮工程','餐饮设备部':'餐饮设备'};
+function mk(id,cfg){
+  const el=document.getElementById(id);
+  if(!el)return;
+  if(el._c)el._c.destroy();
+  el._c=new Chart(el,cfg);
+}
+function sw(pg,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.ntab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('p-'+pg).classList.add('on');
+  btn.classList.add('on');
+  if(pg==='ov'&&!window._oi){initOv();window._oi=true;}
+  if(pg==='ai'&&!window._ai){initAI();window._ai=true;}
+  if(pg==='co'&&!window._co){initCO();window._co=true;}
+  if(pg==='rk'&&!window._rk){initRK();window._rk=true;}
+  if(pg==='ins'&&!window._in){initIN();window._in=true;}
+}
+function initOv(){
+  const kpis=[
+    {l:'参评总人数',v:D.total,s:'翔择创丽总部',c:'#1a7cfa',e:'👥'},
+    {l:'AI绩效均值',v:D.aiAvg,s:'满分7分',c:'#6c63ff',e:'🤖'},
+    {l:'协同绩效均值',v:D.coAvg,s:'满分13分',c:'#00c4b4',e:'🤝'},
+    {l:'AI满分人数(7分)',v:D.aiFull,s:'占比'+(D.aiFull/D.total*100).toFixed(1)+'%',c:'#f5a623',e:'⭐'},
+    {l:'协同高分(≥12分)',v:D.coHigh,s:'占比'+(D.coHigh/D.total*100).toFixed(1)+'%',c:'#43c6ac',e:'🏆'},
+    {l:'月均AI对话数',v:D.aiTalkAvg,s:'次/月',c:'#4facfe',e:'💬'},
+    {l:'AI对话未达标',v:D.aiLow,s:'<6次/月',c:'#ff5f6d',e:'⚠️'},
+  ];
+  document.getElementById('ov-kpi').innerHTML=kpis.map(k=>`<div class="kcard" style="--kc:${k.c}" data-icon="${k.e}"><div class="klb">${k.l}</div><div class="kv">${k.v}</div><div class="ks">${k.s}</div></div>`).join('');
+  const depts=D.ai_l5.map(d=>DS[d.dept]||d.dept);
+  const dColors=D.ai_l5.map(d=>DC[d.dept]||'#aaa');
+  mk('ov-ai',{type:'bar',data:{labels:depts,datasets:[{label:'AI绩效均值',data:D.ai_l5.map(d=>d.perf),backgroundColor:dColors.map(c=>c+'cc'),borderColor:dColors,borderWidth:1.5,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`AI绩效: ${ctx.raw}/7`}}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{min:0,max:8,ticks:{stepSize:1},grid:{color:'rgba(26,124,250,.07)'}}}}});
+  mk('ov-co',{type:'bar',data:{labels:D.co_l5.map(d=>DS[d.dept]||d.dept),datasets:[{label:'协同绩效均值',data:D.co_l5.map(d=>d.perf),backgroundColor:D.co_l5.map(d=>(DC[d.dept]||'#aaa')+'cc'),borderColor:D.co_l5.map(d=>DC[d.dept]||'#aaa'),borderWidth:1.5,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`协同绩效: ${ctx.raw}/13`}}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{min:8,max:14,ticks:{stepSize:1},grid:{color:'rgba(26,124,250,.07)'}}}}});
+  mk('ov-scatter',{type:'bubble',data:{datasets:D.ai_l5.map((d,i)=>{const co=D.co_l5.find(c=>c.dept===d.dept)||{perf:0};return{label:d.dept,data:[{x:d.perf,y:co.perf,r:Math.max(12,d.n*2.5)}],backgroundColor:COLORS[i]+'88',borderColor:COLORS[i],borderWidth:2};})},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{font:{size:11},padding:12}},tooltip:{callbacks:{label:ctx=>{const p=ctx.raw;return[ctx.dataset.label,`AI绩效: ${p.x}/7`,`协同绩效: ${p.y}/13`];}}}},scales:{x:{title:{display:true,text:'AI绩效均值(/7)'},min:0,max:8},y:{title:{display:true,text:'协同绩效均值(/13)'},min:8,max:14}}}});
+}
+function initAI(){
+  const ai=D.ai_l5;
+  const kpis=[
+    {l:'AI满分(7分)',v:D.aiFull,s:D.aiFull+'/'+D.total+'人',c:'#6c63ff',e:'⭐'},
+    {l:'AI绩效均值',v:D.aiAvg,s:'满分7分',c:'#1a7cfa',e:'🤖'},
+    {l:'月均对话数',v:D.aiTalkAvg,s:'次/月',c:'#00c4b4',e:'💬'},
+    {l:'对话未达标',v:D.aiLow,s:'<6次/月',c:'#ff5f6d',e:'⚠️'},
+    {l:'匹配性均值',v:D.aiMatchAvg,s:'满分5分',c:'#f5a623',e:'🎯'},
+  ];
+  document.getElementById('ai-kpi').innerHTML=kpis.map(k=>`<div class="kcard" style="--kc:${k.c}" data-icon="${k.e}"><div class="klb">${k.l}</div><div class="kv">${k.v}</div><div class="ks">${k.s}</div></div>`).join('');
+  const depts=ai.map(d=>DS[d.dept]||d.dept);
+  const dColors=ai.map(d=>DC[d.dept]||'#aaa');
+  mk('ai-perf',{type:'bar',data:{labels:depts,datasets:[{label:'AI绩效均值',data:ai.map(d=>d.perf),backgroundColor:dColors.map(c=>c+'cc'),borderColor:dColors,borderWidth:1.5,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{min:0,max:8,ticks:{stepSize:1}}}}});
+  mk('ai-talks',{type:'bar',data:{labels:depts,datasets:[{label:'月均对话数',data:ai.map(d=>d.talks),backgroundColor:dColors.map(c=>c+'aa'),borderColor:dColors,borderWidth:1.5,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{min:0,ticks:{stepSize:2}}}}});
+  mk('ai-match',{type:'bar',data:{labels:depts,datasets:[{label:'AI匹配性均值',data:ai.map(d=>d.match),backgroundColor:dColors.map(c=>c+'cc'),borderColor:dColors,borderWidth:1.5,borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{min:0,max:5,ticks:{stepSize:1}},y:{grid:{display:false}}}}});
+  const panels=document.getElementById('ai-panels');
+  const byDept={};
+  D.ai_detail.forEach(r=>{if(!byDept[r.部门])byDept[r.部门]=[];byDept[r.部门].push(r);});
+  let html='';
+  ai.forEach((dd,di)=>{
+    const dept=dd.dept,rows=byDept[dept]||[],col=DC[dept]||COLORS[di];
+    html+=`<div class="panel" id="ai-p-${di}">
+      <div class="panel-h" onclick="togglePanel('ai-p-${di}')">
+        <span class="ph-title" style="color:${col}">🏢 ${dept}</span>
+        <div class="ph-meta"><span>${rows.length}人</span><span style="color:${col};font-weight:700">AI绩效均值 ${dd.perf}/7</span><span class="ph-arr">▼</span></div>
+      </div>
+      <div class="panel-b"><table><tr><th>姓名</th><th>月均对话</th><th>岗位匹配</th><th>AI绩效得分</th><th>达标状态</th></tr>
+      ${rows.map(r=>`<tr><td><b>${r.姓名}</b></td><td>${r.talks}次</td><td><div style="font-weight:600">${r.match}/5</div><div class="prog-bar" style="width:80px"><div class="prog-fill" style="width:${r.match/5*100}%;background:${col}"></div></div></td><td><b style="color:${r.perf===7?'#0a8a4a':r.perf>=5?'#b86a00':'#c0392b'}">${r.perf}/7</b></td><td>${r.perf===7?'<span class="tag tg">✓ 满分</span>':r.perf>=5?'<span class="tag ty">良好</span>':'<span class="tag tr">需提升</span>'}</td></tr>`).join('')}
+      </table></div></div>`;
+  });
+  panels.innerHTML=html;
+}
+function initCO(){
+  const co=D.co_l5;
+  const coAvgDoc=Math.round(co.reduce((s,d)=>s+d.myDoc*d.n,0)/D.total*10)/10;
+  const coAvgRel=Math.round(co.reduce((s,d)=>s+d.relDoc*d.n,0)/D.total*10)/10;
+  const kpis=[
+    {l:'协同高分(≥12)',v:D.coHigh,s:D.coHigh+'/'+D.total+'人',c:'#43c6ac',e:'🏆'},
+    {l:'协同绩效均值',v:D.coAvg,s:'满分13分',c:'#00c4b4',e:'🤝'},
+    {l:'月均创建文档',v:coAvgDoc,s:'个/月',c:'#1a7cfa',e:'📄'},
+    {l:'月均相关文档',v:coAvgRel,s:'个/月',c:'#6c63ff',e:'📎'},
+    {l:'文档创建未达标',v:D.coLow3,s:'<3个/月',c:'#ff5f6d',e:'⚠️'},
+  ];
+  document.getElementById('co-kpi').innerHTML=kpis.map(k=>`<div class="kcard" style="--kc:${k.c}" data-icon="${k.e}"><div class="klb">${k.l}</div><div class="kv">${k.v}</div><div class="ks">${k.s}</div></div>`).join('');
+  const depts=co.map(d=>DS[d.dept]||d.dept);
+  const dColors=co.map(d=>DC[d.dept]||'#aaa');
+  mk('co-perf',{type:'bar',data:{labels:depts,datasets:[{label:'协同绩效均值',data:co.map(d=>d.perf),backgroundColor:dColors.map(c=>c+'cc'),borderColor:dColors,borderWidth:1.5,borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{min:8,max:14,ticks:{stepSize:1}}}}});
+  mk('co-docs',{type:'bar',data:{labels:depts,datasets:[{label:'月均创建文档',data:co.map(d=>d.myDoc),backgroundColor:'#1a7cfa99',borderColor:'#1a7cfa',borderWidth:1.5,borderRadius:4},{label:'月均相关文档',data:co.map(d=>d.relDoc),backgroundColor:'#6c63ff77',borderColor:'#6c63ff',borderWidth:1.5,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11}}}},scales:{x:{grid:{display:false}},y:{min:0,ticks:{stepSize:5}}}}});
+  mk('co-match',{type:'bar',data:{labels:depts,datasets:[{label:'文档匹配性',data:co.map(d=>d.docMatch),backgroundColor:dColors.map(c=>c+'cc'),borderColor:dColors,borderWidth:1.5,borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{min:0,max:5,ticks:{stepSize:1}},y:{grid:{display:false}}}}});
+  const panels=document.getElementById('co-panels');
+  const byDept={};
+  D.co_detail.forEach(r=>{if(!byDept[r.部门])byDept[r.部门]=[];byDept[r.部门].push(r);});
+  let html='';
+  co.forEach((dd,di)=>{
+    const dept=dd.dept,rows=byDept[dept]||[],col=DC[dept]||COLORS[di];
+    html+=`<div class="panel" id="co-p-${di}">
+      <div class="panel-h" onclick="togglePanel('co-p-${di}')">
+        <span class="ph-title" style="color:${col}">🏢 ${dept}</span>
+        <div class="ph-meta"><span>${rows.length}人</span><span style="color:${col};font-weight:700">协同绩效均值 ${dd.perf}/13</span><span class="ph-arr">▼</span></div>
+      </div>
+      <div class="panel-b"><table><tr><th>姓名</th><th>创建文档</th><th>相关文档</th><th>文档匹配</th><th>协同绩效</th><th>达标状态</th></tr>
+      ${rows.map(r=>`<tr><td><b>${r.姓名}</b></td><td>${r.myDoc>=3?`<span class="tag tg">✓ ${r.myDoc}个</span>`:`<span class="tag tr">${r.myDoc}个</span>`}</td><td>${r.relDoc>=5?`<span class="tag tb">✓ ${r.relDoc}个</span>`:`<span class="tag ty">${r.relDoc}个</span>`}</td><td><div style="font-weight:600">${r.docMatch}/5</div><div class="prog-bar" style="width:80px"><div class="prog-fill" style="width:${r.docMatch/5*100}%;background:${col}"></div></div></td><td><b style="color:${r.perf>=12?'#0a8a4a':r.perf>=10?'#b86a00':'#c0392b'}">${r.perf}/13</b></td><td>${r.perf>=12?'<span class="tag tg">✓ 优秀</span>':r.perf>=10?'<span class="tag ty">良好</span>':'<span class="tag tr">需提升</span>'}</td></tr>`).join('')}
+      </table></div></div>`;
+  });
+  panels.innerHTML=html;
+}
+function initRK(){
+  const aiR=[...D.ai_l5].sort((a,b)=>b.perf-a.perf);
+  const coR=[...D.co_l5].sort((a,b)=>b.perf-a.perf);
+  function badge(i){if(i===0)return'<span class="rank-badge r1">🥇</span>';if(i===1)return'<span class="rank-badge r2">🥈</span>';if(i===2)return'<span class="rank-badge r3">🥉</span>';return`<span class="rank-badge rn">${i+1}</span>`;}
+  document.getElementById('rk-content').innerHTML=`
+    <div class="grid2">
+      <div class="card"><div class="ch"><div class="ct">🤖 AI绩效排名</div></div>
+        <table><tr><th>排名</th><th>部门</th><th>人数</th><th>AI绩效均值</th><th>月均对话</th><th>匹配性</th></tr>
+        ${aiR.map((d,i)=>`<tr><td>${badge(i)}</td><td style="font-weight:600;color:${DC[d.dept]||'#1a7cfa'}">${d.dept}</td><td>${d.n}人</td><td><b style="color:${d.perf===7?'#0a8a4a':d.perf>=5?'#b86a00':'#c0392b'}">${d.perf}/7</b></td><td>${d.talks}次</td><td>${d.match}/5</td></tr>`).join('')}
+        </table></div>
+      <div class="card"><div class="ch"><div class="ct">🤝 协同绩效排名</div></div>
+        <table><tr><th>排名</th><th>部门</th><th>人数</th><th>协同绩效均值</th><th>创建文档</th><th>相关文档</th></tr>
+        ${coR.map((d,i)=>`<tr><td>${badge(i)}</td><td style="font-weight:600;color:${DC[d.dept]||'#1a7cfa'}">${d.dept}</td><td>${d.n}人</td><td><b style="color:${d.perf>=12?'#0a8a4a':d.perf>=10?'#b86a00':'#c0392b'}">${d.perf}/13</b></td><td>${d.myDoc}个</td><td>${d.relDoc}个</td></tr>`).join('')}
+        </table></div>
+    </div>
+    <div class="card"><div class="ch"><div class="ct">📊 综合排名（AI+协同加权）</div><div class="cb2">AI绩效/7×50% + 协同绩效/13×50%</div></div>
+      <table><tr><th>排名</th><th>部门</th><th>人数</th><th>AI绩效</th><th>协同绩效</th><th>综合得分</th><th>综合评级</th></tr>
+      ${D.ai_l5.map(a=>{const c=D.co_l5.find(x=>x.dept===a.dept)||{perf:0};return{dept:a.dept,n:a.n,ai:a.perf,co:c.perf,comp:Math.round((a.perf/7*0.5+c.perf/13*0.5)*100)/100};}).sort((a,b)=>b.comp-a.comp).map((d,i)=>`<tr><td>${badge(i)}</td><td style="font-weight:600;color:${DC[d.dept]||'#1a7cfa'}">${d.dept}</td><td>${d.n}人</td><td>${d.ai}/7</td><td>${d.co}/13</td><td><b>${(d.comp*100).toFixed(1)}%</b></td><td>${d.comp>=0.9?'<span class="tag tg">优秀</span>':d.comp>=0.75?'<span class="tag ty">良好</span>':'<span class="tag tr">需提升</span>'}</td></tr>`).join('')}
+      </table></div>`;
+}
+function heatColor(val,max){const ratio=Math.min(val/max,1);const r=Math.round(221-ratio*(221-26));const g=Math.round(238-ratio*(238-124));const b=Math.round(255-ratio*(255-250));return `rgb(${r},${g},${b})`;}
+function textColor(val,max){return val/max>0.55?'#fff':'#1a2a4a';}
+function initIN(){
+  const allAi=D.ai_detail,allCo=D.co_detail;
+  const aiF=allAi.filter(r=>r.perf===7).length,aiU6=allAi.filter(r=>r.talks<6).length;
+  const coH=allCo.filter(r=>r.perf>=12).length,coU3=allCo.filter(r=>r.myDoc<3).length;
+  const dims=[
+    {label:'AI绩效均值',max:7,get:d=>D.ai_l5.find(x=>x.dept===d)?.perf||0,unit:'/7'},
+    {label:'月均对话次数',max:20,get:d=>D.ai_l5.find(x=>x.dept===d)?.talks||0,unit:'次'},
+    {label:'AI匹配性',max:5,get:d=>D.ai_l5.find(x=>x.dept===d)?.match||0,unit:'/5'},
+    {label:'协同绩效均值',max:13,get:d=>D.co_l5.find(x=>x.dept===d)?.perf||0,unit:'/13'},
+    {label:'月均创建文档',max:15,get:d=>D.co_l5.find(x=>x.dept===d)?.myDoc||0,unit:'个'},
+    {label:'月均相关文档',max:35,get:d=>D.co_l5.find(x=>x.dept===d)?.relDoc||0,unit:'个'},
+    {label:'文档匹配性',max:5,get:d=>D.co_l5.find(x=>x.dept===d)?.docMatch||0,unit:'/5'},
+  ];
+  const depts=D.ai_l5.map(d=>d.dept);
+  let tbl=`<div class="hm-wrap"><table class="hm-table"><tr><th>部门</th>`;
+  dims.forEach(d=>{tbl+=`<th>${d.label}</th>`;});
+  tbl+='</tr>';
+  depts.forEach(dept=>{
+    const col=DC[dept]||'#1a7cfa';
+    tbl+=`<tr><td class="dept-cell" style="border-left:3px solid ${col}">${dept}</td>`;
+    dims.forEach(dim=>{const v=dim.get(dept);const bg=heatColor(v,dim.max);const tc=textColor(v,dim.max);tbl+=`<td style="background:${bg};color:${tc}">${v}${dim.unit}</td>`;});
+    tbl+='</tr>';
+  });
+  tbl+='</table></div>';
+  const gDepts=depts.map(d=>DS[d]||d);
+  document.getElementById('ins-content').innerHTML=`
+    <div class="kgrid" style="margin-bottom:20px">
+      <div class="kcard" style="--kc:#1a7cfa" data-icon="⭐"><div class="klb">AI满分人数(7分)</div><div class="kv">${aiF}</div><div class="ks">占比${(aiF/allAi.length*100).toFixed(1)}%</div></div>
+      <div class="kcard" style="--kc:#ff5f6d" data-icon="⚠️"><div class="klb">AI对话未达标(&lt;6次)</div><div class="kv">${aiU6}</div><div class="ks">占比${(aiU6/allAi.length*100).toFixed(1)}%</div></div>
+      <div class="kcard" style="--kc:#43c6ac" data-icon="🏆"><div class="klb">协同高分(≥12分)</div><div class="kv">${coH}</div><div class="ks">占比${(coH/allCo.length*100).toFixed(1)}%</div></div>
+      <div class="kcard" style="--kc:#f5a623" data-icon="📄"><div class="klb">文档创建未达标(&lt;3个)</div><div class="kv">${coU3}</div><div class="ks">占比${(coU3/allCo.length*100).toFixed(1)}%</div></div>
+    </div>
+    <div class="card"><div class="ch"><div class="ct">🔥 部门双维考核热力矩阵</div><div class="cb2">颜色越深=得分越高</div></div><div style="overflow-x:auto">${tbl}</div></div>
+    <div class="card"><div class="ch"><div class="ct">📊 各部门多维能力对比（占满分%）</div><div class="cb2">统一换算为百分比便于横向对比</div></div><div class="cw tall"><canvas id="ins-grouped"></canvas></div></div>
+    <div class="card"><div class="ch"><div class="ct">📌 改善建议 &amp; 行动方向</div></div><div class="cb">
+      <div class="ic" style="border-left-color:#ff5f6d">
+        <div class="it">⚠️ 场景体验设计部：AI绩效大幅拖后腿</div>
+        <div class="ib">场景体验设计部 AI绩效均值仅 <b>2.8/7</b>，是全部门最低，AI匹配性得分仅2.76，明显低于其他部门（均值4.6+）。<br>
+          ① 对设计部员工开展AI工具岗位场景定向培训<br>
+          ② 匹配性低（≤1.5分）的3名员工需1v1复盘AI使用情况<br>
+          ③ 设立每月AI对话量目标（建议≥8次），由部门主管追踪</div></div>
+      <div class="ic" style="border-left-color:#1a7cfa">
+        <div class="it">✅ 餐饮设备部：AI使用频次领跑全部门</div>
+        <div class="ib">餐饮设备部月均AI对话 <b>11.43次</b>，是全公司最高频次部门，AI绩效均值达满分7.0/7。<br>
+          ① 收集餐饮设备部高频AI应用场景，整理为案例集<br>
+          ② 在全员范围内分享最佳实践，带动其他部门</div></div>
+      <div class="ic" style="border-left-color:#6c63ff">
+        <div class="it">🔍 便利建设部：相关文档量突出但匹配性偏低</div>
+        <div class="ib">便利建设部月均相关文档 <b>29.14个</b>（全公司最高），但文档匹配性均值仅4.0/5。<br>
+          ① 检视现有文档是否真正对应岗位核心工作<br>
+          ② 引导员工提升文档内容质量，而非单纯追求数量</div></div>
+      <div class="ic" style="border-left-color:#00c4b4">
+        <div class="it">🏆 总经办：双维均衡表现优异</div>
+        <div class="ib">总经办 AI绩效均值7.0/7（满分），协同绩效均值 <b>12.65/13</b>（全公司最高），双维均衡领先。<br>
+          ① 总经办可作为标杆单元，参与跨部门经验分享<br>
+          ② 其文档匹配性均值4.65，建议输出最佳文档使用规范</div></div>
+      <div class="ic" style="border-left-color:#f5a623">
+        <div class="it">📈 整体向好：AI满分率90%，协同优秀率73%</div>
+        <div class="ib">全员AI满分（7分）共 <b>27人（90%）</b>，协同≥12分 <b>22人（73.3%）</b>，整体表现优秀。<br>
+          文档创建仅1人未达3个门槛，为个案处理即可。<br>
+          ① 持续保持高满分率，重点关注场景体验设计部的拉分情况<br>
+          ② 建立每月数智化工具使用通报机制，形成持续激励</div></div>
+    </div></div>`;
+  setTimeout(()=>{
+    const gData=dims.map(dim=>depts.map(dept=>{const v=dim.get(dept);return Math.round(v/dim.max*100);}));
+    mk('ins-grouped',{type:'bar',data:{labels:gDepts,datasets:dims.map((dim,i)=>({label:dim.label,data:gData[i],backgroundColor:COLORS[i]+'bb',borderColor:COLORS[i],borderWidth:1,borderRadius:3}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',labels:{font:{size:11},padding:10}},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.raw}%`}}},scales:{x:{grid:{display:false}},y:{min:0,max:100,ticks:{callback:v=>v+'%',stepSize:20},title:{display:true,text:'占满分百分比（%）'}}}}});
+  },50);
+}
+function togglePanel(id){document.getElementById(id).classList.toggle('open');}
+window.addEventListener('load',()=>{initOv();window._oi=true;});
+</script>
+</body>
+</html>
